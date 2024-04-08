@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { recipeModel } from './recipe.model';
 
 @Component({
   selector: 'app-recipes',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './recipes.component.css'
 })
 export class RecipesComponent {
+  GetItemFromList: recipeModel;
+  @Output() SendItemToDetail = new EventEmitter<recipeModel>();
 
 }
