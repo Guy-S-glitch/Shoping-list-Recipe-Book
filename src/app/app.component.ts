@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'course-project';
+  page: string;
+  Direction(selection: string) {
+    this.page = selection;
+  }
+
 }
