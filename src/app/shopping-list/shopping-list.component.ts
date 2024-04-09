@@ -5,14 +5,14 @@ import { ingredients } from "../shared/ingredients.model";
     templateUrl: './shopping-list.component.html',
     styleUrl: './shopping-list.component.css'
 })
-export class shoppingListComponent implements OnInit {
+export class shoppingListComponent {
     ingredientList: ingredients[] = [
         new ingredients('apple', 5),
         new ingredients('banana', 10)
     ];
     constructor() { }
-
-    ngOnInit(): void {
-
+ 
+    addUserIngredient(UserIngredient:ingredients){ 
+        this.ingredientList.push(UserIngredient);
     }
 }
