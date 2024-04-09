@@ -7,5 +7,5 @@ import { recipeModel } from '../recipe.model';
   styleUrl: './recipe-detail.component.css'
 })
 export class RecipeDetailComponent {
-  @Input() GetSelectedItem: recipeModel;
-} 
+  @Input() GetSelectedItem: recipeModel ;
+}
