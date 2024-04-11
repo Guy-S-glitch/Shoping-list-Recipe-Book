@@ -1,11 +1,11 @@
 <app-header (GetPage)="Direction($event)"></app-header>
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <app-recipes *ngIf="page==='Recipes';else Shopping"></app-recipes>
-            <ng-template #Shopping>
-                <app-shopping-list></app-shopping-list>
-            </ng-template>
-        </div>
+  <div class="row">
+    <div class="col-md-12">
+      <app-recipes *ngIf="page === 'Recipes'; else Shopping"></app-recipes>
+      <ng-template #Shopping>
+        <app-shopping-list></app-shopping-list>
+      </ng-template>
     </div>
+  </div>
 </div>

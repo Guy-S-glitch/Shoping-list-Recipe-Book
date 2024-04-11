@@ -1,4 +1,4 @@
-import { ShoppingService } from '../../services/shopping.service';
+import { ShoppingService } from '../../../services/shopping.service';
 import {
   Component,
   ElementRef,
@@ -8,7 +8,7 @@ import {
   ViewChild,
   inject,
 } from '@angular/core';
-import { ingredients } from '../../Models/ingredients.model';
+import { ingredients } from '../../../Models/ingredients.model';
 
 @Component({
   selector: 'app-shopping-edit',
