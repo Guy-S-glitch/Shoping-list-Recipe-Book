@@ -14,6 +14,9 @@ export class shoppingListComponent implements OnInit {
   }
   ngOnInit(): void {
     this.ingredientsList = this.shoppingService.ingredientList;
+    this.shoppingService.IngredientEvent.subscribe((ingredientsList:ingredients[])=>{
+      this.ingredientsList=ingredientsList;
+    })
   }
   addUserIngredient(UserIngredient: ingredients) {
     this.shoppingService.addUserIngredient(UserIngredient);

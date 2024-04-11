@@ -1,8 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { recipeModel } from '../Models/recipe.model';
-import { ingredients } from '../Models/ingredients.model';
-import { first } from 'rxjs';
-
+import { ingredients } from '../Models/ingredients.model'; 
 @Injectable({
   providedIn: 'root',
 })

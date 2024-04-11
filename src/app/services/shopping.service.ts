@@ -5,6 +5,7 @@ import { ElementRef, EventEmitter, Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ShoppingService {
+  IngredientEvent = new EventEmitter<ingredients[]>();
   constructor() {}
   ingredientList: ingredients[] = [
     new ingredients('apple', 5),
@@ -20,5 +21,10 @@ export class ShoppingService {
         amountInputRef.nativeElement.value
       )
     );
+    this.IngredientEvent.emit(this.ingredientList);
+  }
+  AddIngredientsFromShoppingList(ingredients: ingredients[]) {
+    this.ingredientList.push(...ingredients);
+    this.IngredientEvent.emit(this.ingredientList);
   }
 }
