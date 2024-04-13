@@ -24,7 +24,7 @@ import { appRoute } from './routers/app-router.routing';
     RecipeItemComponent,
     dropdownDirective,
   ],
-  imports: [BrowserModule, FormsModule,appRoute],
+  imports: [BrowserModule, FormsModule, appRoute],
   providers: [],
   bootstrap: [AppComponent],
 })
