@@ -4,6 +4,8 @@ import { shoppingListComponent } from '../components/shopping-list/shopping-list
 import { NgModule } from '@angular/core';
 import { RecipeStartComponent } from '../components/recipes/recipe-start/recipe-start.component';
 import { RecipeDetailComponent } from '../components/recipes/recipe-detail/recipe-detail.component';
+import { RecipeNewComponent } from '../components/recipes/recipe-new/recipe-new.component';
+import { RecipeEditComponent } from '../components/recipes/recipe-edit/recipe-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
@@ -12,7 +14,9 @@ const routes: Routes = [
     component: RecipesComponent,
     children: [
       { path: '', component: RecipeStartComponent },
+      { path: 'new', component: RecipeNewComponent },
       { path: ':id', component: RecipeDetailComponent },
+      { path: ':id/edit', component: RecipeEditComponent },
     ],
   },
   { path: 'shopping-list', component: shoppingListComponent },

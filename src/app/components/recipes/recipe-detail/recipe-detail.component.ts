@@ -30,4 +30,7 @@ export class RecipeDetailComponent implements OnInit {
       this.GetSelectedItem.GetIngrediets()
     );
   }
+  editRecipe(){
+    this.router.navigate(['edit'],{relativeTo:this.route});
+  }
 }
