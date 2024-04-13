@@ -8,7 +8,7 @@ import {
   isPlatformServer,
   parseCookieValue,
   setRootDomAdapter
-} from "./chunk-TTNG6IMQ.js";
+} from "./chunk-XOMUBLGJ.js";
 import {
   APP_BOOTSTRAP_LISTENER,
   APP_ID,
@@ -25,7 +25,6 @@ import {
   InjectionToken,
   NgModule,
   NgZone,
-  Observable,
   Optional,
   PLATFORM_ID,
   PLATFORM_INITIALIZER,
@@ -43,10 +42,6 @@ import {
   Version,
   ViewEncapsulation$1,
   XSS_SECURITY_URL,
-  __async,
-  __objRest,
-  __spreadProps,
-  __spreadValues,
   _global,
   _sanitizeHtml,
   _sanitizeUrl,
@@ -58,17 +53,13 @@ import {
   bypassSanitizationTrustUrl,
   concatMap,
   createPlatformFactory,
-  filter,
   finalize,
   formatRuntimeError,
   forwardRef,
-  from,
   inject,
   internalCreateApplication,
   makeEnvironmentProviders,
   makeStateKey,
-  map,
-  of,
   performanceMarkFeature,
   platformCore,
   runInInjectionContext,
@@ -84,7 +75,18 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵinject
-} from "./chunk-EFOUL6KJ.js";
+} from "./chunk-PFOVKIBA.js";
+import {
+  Observable,
+  __async,
+  __objRest,
+  __spreadProps,
+  __spreadValues,
+  filter,
+  from,
+  map,
+  of
+} from "./chunk-EF422VNQ.js";
 
 // node_modules/@angular/common/fesm2022/http.mjs
 var HttpHandler = class {
@@ -4071,4 +4073,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-SH2UNJBO.js.map
+//# sourceMappingURL=chunk-2GNZRWLH.js.map
