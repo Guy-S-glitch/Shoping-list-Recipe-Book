@@ -1,11 +1,18 @@
 <div class="row">
-    <div class="col-xs-10">
-        <app-shopping-edit  (newIngredient)="addUserIngredient($event)"></app-shopping-edit>
-        <hr>
-        <ul class="list-group">
-            <a class="list-group-item" style="cursor: pointer;" *ngFor="let ingredient of ingredientsList">
-                {{ingredient.GetName()}} ({{ingredient.GetAmount()}})
-            </a>
-        </ul>
-    </div>
+  <div class="col-xs-10">
+    <app-shopping-edit
+      (newIngredient)="addUserIngredient($event)"
+    ></app-shopping-edit>
+    <hr />
+    <ul class="list-group">
+      <a
+        class="list-group-item"
+        style="cursor: pointer"
+        *ngFor="let ingredient of ingredientsList;let i=index"
+        (click)="editedIngredient(i)"
+      >
+        {{ ingredient.GetName() }} ({{ ingredient.GetAmount() }})</a
+      >
+    </ul>
+  </div>
 </div>
