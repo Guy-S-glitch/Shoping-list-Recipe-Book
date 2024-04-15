@@ -28,10 +28,13 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
         new ingredients(form.value.name, form.value.amount)
       );
     }
-    this.editMode=false;
-  form.reset();
+    this.editMode = false;
+    form.reset();
   }
-
+  onClear() {
+    this.form.reset();
+    this.editMode = false;
+  }
   ngOnInit(): void {
     this.sub = this.shoppingService.editedIngredient.subscribe(
       (index: number) => {
@@ -48,5 +51,5 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
-  } 
+  }
 }

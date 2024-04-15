@@ -30,7 +30,7 @@
                 <div class="col-xs-12">
                     <button type="submit" class="btn btn-success" [disabled]="!f.valid">{{editMode?'Update':'Add'}}</button>
                     <button type="button" class="btn btn-danger" style="margin-left: 5px;" >Remove</button>
-                    <button type="button" class="btn btn-primary" style="margin-left: 5px;">Clear</button>
+                    <button type="button" class="btn btn-primary" style="margin-left: 5px;" (click)="onClear()">Clear</button>
                 </div>
             </div>
         </form>
