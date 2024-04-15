@@ -63,4 +63,12 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   getEditIngredient() {
     return (<FormArray>this.form.get('ingredients')).controls;
   }
+  AddIngredient() {
+    (<FormArray>this.form.get('ingredients')).controls.push(
+      new FormGroup({
+        name: new FormControl(),
+        amount: new FormControl(),
+      })
+    );
+  }
 }
