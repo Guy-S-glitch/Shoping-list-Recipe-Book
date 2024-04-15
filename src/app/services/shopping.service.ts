@@ -7,7 +7,7 @@ import { ElementRef, Injectable } from '@angular/core';
 })
 export class ShoppingService {
   IngredientEvent = new Subject<ingredients[]>();
-  editedIngredient=new Subject<number>();
+  editedIngredient = new Subject<number>();
   constructor() {}
   ingredientList: ingredients[] = [
     new ingredients('apple', 5),
@@ -24,13 +24,15 @@ export class ShoppingService {
     this.ingredientList.push(...ingredients);
     this.IngredientEvent.next(this.ingredientList.slice());
   }
-  getIngredient(index:number){
+  getIngredient(index: number) {
     return this.ingredientList[index];
   }
-  updateIngredients(index:number,ingredient:ingredients){
-    this.ingredientList[index]=ingredient;
+  updateIngredients(index: number, ingredient: ingredients) {
+    this.ingredientList[index] = ingredient;
     this.IngredientEvent.next(this.ingredientList.slice());
-    console.log(this.ingredientList);
-    
+  }
+  removeIngedient(index: number) {
+    this.ingredientList.splice(index, 1);
+    this.IngredientEvent.next(this.ingredientList.slice());
   }
 }
