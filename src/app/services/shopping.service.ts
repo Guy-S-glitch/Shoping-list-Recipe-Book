@@ -1,5 +1,5 @@
+import { ingredients } from './../Models/ingredients.model';
 import { Subject } from 'rxjs';
-import { ingredients } from '../Models/ingredients.model';
 import { ElementRef, Injectable } from '@angular/core';
 
 @Injectable({
@@ -15,13 +15,8 @@ export class ShoppingService {
   addUserIngredient(UserIngredient: ingredients) {
     this.ingredientList.push(UserIngredient);
   }
-  AddIngredient(nameInputRef: ElementRef, amountInputRef: ElementRef) {
-    this.ingredientList.push(
-      new ingredients(
-        nameInputRef.nativeElement.value,
-        amountInputRef.nativeElement.value
-      )
-    );
+  AddIngredient(ingredients: ingredients) {
+    this.ingredientList.push(ingredients);
     this.IngredientEvent.next(this.ingredientList);
   }
   AddIngredientsFromShoppingList(ingredients: ingredients[]) {
