@@ -1,19 +1,15 @@
-import { OnDestroy, OnInit } from '@angular/core';
-import { RecipesService } from '../../services/recipes.service';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { recipeModel } from '../../Models/recipe.model';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
-  styleUrl: './recipes.component.css',
+  styleUrls: ['./recipes.component.css']
 })
-export class RecipesComponent implements OnInit, OnDestroy {
-  GetItemFromList: recipeModel;
-  @Output() SendItemToDetail = new EventEmitter<recipeModel>();
+export class RecipesComponent implements OnInit {
 
-  constructor() {}
-  ngOnInit(): void {}
-  ngOnDestroy(): void {}
+  constructor() { }
+
+  ngOnInit() {
+  }
+
 }

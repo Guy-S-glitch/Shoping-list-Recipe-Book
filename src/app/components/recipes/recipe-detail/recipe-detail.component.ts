@@ -1,42 +1,37 @@
-import { ShoppingService } from './../../../services/shopping.service';
-import { RecipesService } from '../../../services/recipes.service';
-import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
-import { recipeModel } from '../../../Models/recipe.model';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+
+import { Recipe } from '../../../Models/recipe.model';
+import { RecipeService } from '../../../services/recipe.service';
 
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
-  styleUrl: './recipe-detail.component.css',
+  styleUrls: ['./recipe-detail.component.css'],
 })
-export class RecipeDetailComponent implements OnInit, OnDestroy {
-  GetSelectedItem: recipeModel;
-
+export class RecipeDetailComponent implements OnInit {
+  recipe: Recipe;
   id: number;
-  private sub: Subscription;
+
   constructor(
-    private router: Router,
+    private recipeService: RecipeService,
     private route: ActivatedRoute,
-    private recipesService: RecipesService,
-    private shoppingService: ShoppingService
+    private router: Router
   ) {}
-  ngOnInit(): void {
-    this.id = +this.route.snapshot.params['id'];
-    this.sub = this.route.params.subscribe((params: Params) => {
+
+  ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
-      this.GetSelectedItem = this.recipesService.GetRecipes()[this.id];
+      this.recipe = this.recipeService.getRecipe(this.id);
     });
   }
-  SendToIngredients() {
-    this.shoppingService.AddIngredientsFromShoppingList(
-      this.GetSelectedItem.GetIngrediets()
-    );
+
+  onAddToShoppingList() {
+    this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
   }
-  editRecipe() {
+
+  onEditRecipe() {
     this.router.navigate(['edit'], { relativeTo: this.route });
-  }
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    // this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
   }
 }
