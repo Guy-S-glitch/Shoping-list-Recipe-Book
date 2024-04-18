@@ -3,13 +3,13 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  isLoginMode = false;
+  constructor() {}
+  switchMode() {
+    this.isLoginMode = !this.isLoginMode; 
   }
-
+  ngOnInit() {}
 }
