@@ -7,13 +7,11 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
-  sub: Subscription;
   constructor(private dataStorageService: DataStorageService) {}
   onSave() {
-    console.log('aaa');
-    
-    this.sub = this.dataStorageService.saveData().subscribe((response) => {
-      console.log(response);
-    });
+    this.dataStorageService.saveData();
+  }
+  onFetch() {
+    this.dataStorageService.fetchData();
   }
 }
