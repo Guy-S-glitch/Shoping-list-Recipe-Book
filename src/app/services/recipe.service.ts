@@ -9,7 +9,20 @@ import { ShoppingListService } from './shopping-list.service';
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [];
+  private recipes: Recipe[] = [
+    // new Recipe(
+    //   'Snitzelim',
+    //   'goood',
+    //   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyKIfkDVw9KqcWp0DPYCDhl4GA98hRqfDf1WQenMbvif6OUZtHVdxwM-O1aFcZowmbdCg&usqp=CAU',
+    //   [new Ingredient('car', 1), new Ingredient('banana', 6)]
+    // ),
+    // new Recipe(
+    //   'OTher shi',
+    //   'goood',
+    //   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyKIfkDVw9KqcWp0DPYCDhl4GA98hRqfDf1WQenMbvif6OUZtHVdxwM-O1aFcZowmbdCg&usqp=CAU',
+    //   [new Ingredient('car', 1), new Ingredient('banana', 6)]
+    // ),
+  ];
 
   constructor(private slService: ShoppingListService) {}
 
