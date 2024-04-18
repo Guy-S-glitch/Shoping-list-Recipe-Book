@@ -1,47 +1,56 @@
 {
-  "hash": "07663b35",
-  "browserHash": "0d64b70c",
+  "hash": "990109e7",
+  "browserHash": "83e41841",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "9af8601c",
+      "fileHash": "9d943fc6",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "6bc1fd63",
+      "fileHash": "cc4749ac",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "327524d6",
+      "fileHash": "43d6374f",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "02aeec31",
+      "fileHash": "59203e5d",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "ce232911",
+      "fileHash": "18debf9a",
       "needsInterop": false
     },
     "rxjs/Subject": {
       "src": "../../../../../node_modules/rxjs/Subject.js",
       "file": "rxjs_Subject.js",
-      "fileHash": "0e6e355c",
+      "fileHash": "fd2f50fd",
       "needsInterop": true
+    },
+    "@angular/common/http": {
+      "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "ca927fa3",
+      "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-7BSCVS5C": {
-      "file": "chunk-7BSCVS5C.js"
+    "chunk-LOJNR3HY": {
+      "file": "chunk-LOJNR3HY.js"
+    },
+    "chunk-PSJKQGCO": {
+      "file": "chunk-PSJKQGCO.js"
     },
     "chunk-BSH7ZBXD": {
       "file": "chunk-BSH7ZBXD.js"
