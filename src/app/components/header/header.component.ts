@@ -9,9 +9,13 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
   constructor(private dataStorageService: DataStorageService) {}
   onSave() {
-    this.dataStorageService.saveData();
+    this.dataStorageService.saveData().subscribe((data) => {
+      console.log(data);
+    });
   }
   onFetch() {
-    this.dataStorageService.fetchData();
+    this.dataStorageService.fetchData().subscribe((data) => {
+      console.log(data);
+    });
   }
 }
