@@ -9,6 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class AuthComponent implements OnInit {
   isLoginMode = false;
+  isLoading = false;
   loginForm: FormGroup;
   constructor(private authService: AuthService) {}
   switchMode() {
@@ -23,14 +24,17 @@ export class AuthComponent implements OnInit {
     }
     if (this.isLoginMode) {
     } else {
+      this.isLoading = true;
       const email = this.loginForm.value['email'];
       const password = this.loginForm.value['password'];
       this.authService.signup(email, password).subscribe(
         (responseData) => {
           console.log(responseData);
+          this.isLoading = false;
         },
         (error) => {
           console.log(error.error.error.message);
+          this.isLoading = false;
         }
       );
     }
@@ -38,7 +42,10 @@ export class AuthComponent implements OnInit {
   initForm() {
     this.loginForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.minLength(6)]),
+      password: new FormControl(null, [
+        Validators.minLength(6),
+        Validators.required,
+      ]),
     });
   }
 }
