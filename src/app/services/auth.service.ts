@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, throwError } from 'rxjs';
+import { BehaviorSubject, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from '../Models/user.model';
 export interface ResponsePayload {
@@ -15,7 +15,8 @@ export interface ResponsePayload {
   providedIn: 'root',
 })
 export class AuthService {
-  user = new Subject<User>();
+  user = new BehaviorSubject<User>(null);
+
   constructor(private http: HttpClient) {}
   signUp(userEmail: string, userPassword: string) {
     return this.http
@@ -46,13 +47,15 @@ export class AuthService {
   }
 
   private HandleAuthentication(resData: ResponsePayload) {
-    const expDate = new Date(new Date().getDate() + +resData.expiresIn * 1000);
+    const expDate = new Date(new Date().getTime() + +resData.expiresIn * 1000);
     const user = new User(
       resData.email,
       resData.localId,
       resData.idToken,
       expDate
     );
+    console.log('tokeen is '+user.token);
+    
     this.user.next(user);
   }
   private HandleError(errorRes: HttpErrorResponse) {
