@@ -18,7 +18,7 @@ export interface ResponsePayload {
 export class AuthService {
   user = new BehaviorSubject<User>(null);
 
-  constructor(private http: HttpClient,private router:Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
   signUp(userEmail: string, userPassword: string) {
     return this.http
       .post<ResponsePayload>(
@@ -46,11 +46,31 @@ export class AuthService {
         tap((ResData: ResponsePayload) => this.HandleAuthentication(ResData))
       );
   }
-  logOut(){
+  logOut() {
     this.user.next(null);
     this.router.navigate(['./auth']);
   }
 
+  autoLogin() {
+    const user: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: string;
+    } = JSON.parse(localStorage.getItem('userData'));
+    if (!user) {
+      return;
+    }
+    const loadedUser = new User(
+      user.email,
+      user.id,
+      user._token,
+      new Date(user._tokenExpirationDate)
+    );
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+    }
+  }
   private HandleAuthentication(resData: ResponsePayload) {
     const expDate = new Date(new Date().getTime() + +resData.expiresIn * 1000);
     const user = new User(
@@ -59,9 +79,8 @@ export class AuthService {
       resData.idToken,
       expDate
     );
-    console.log('tokeen is '+user.token);
-    
     this.user.next(user);
+    localStorage.setItem('userData', JSON.stringify(user));
   }
   private HandleError(errorRes: HttpErrorResponse) {
     console.log(errorRes);
