@@ -10,6 +10,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class AuthComponent implements OnInit {
   isLoginMode = false;
   isLoading = false;
+  errorMessage: string = null;
   loginForm: FormGroup;
   constructor(private authService: AuthService) {}
   switchMode() {
@@ -32,8 +33,8 @@ export class AuthComponent implements OnInit {
           console.log(responseData);
           this.isLoading = false;
         },
-        (error) => {
-          console.log(error.error.error.message);
+        (error) => { 
+          this.errorMessage=error;
           this.isLoading = false;
         }
       );
@@ -47,5 +48,5 @@ export class AuthComponent implements OnInit {
         Validators.required,
       ]),
     });
-  }
+  } 
 }
