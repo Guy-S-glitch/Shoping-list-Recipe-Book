@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Subject, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { User } from '../Models/user.model';
 export interface ResponsePayload {
   idToken: string;
   email: string;
@@ -14,6 +15,7 @@ export interface ResponsePayload {
   providedIn: 'root',
 })
 export class AuthService {
+  user = new Subject<User>();
   constructor(private http: HttpClient) {}
   signUp(userEmail: string, userPassword: string) {
     return this.http
@@ -25,7 +27,7 @@ export class AuthService {
           returnSecureToken: true,
         }
       )
-      .pipe(catchError(this._HandleError));
+      .pipe(catchError(this.HandleError), tap(this.HandleAuthentication));
   }
   signIn(userEmail: string, userPassword: string) {
     return this.http
@@ -37,12 +39,25 @@ export class AuthService {
           returnSecureToken: true,
         }
       )
-      .pipe(catchError(this._HandleError));
+      .pipe(
+        catchError(this.HandleError),
+        tap((ResData: ResponsePayload) => this.HandleAuthentication(ResData))
+      );
   }
 
-  private _HandleError(errorRes: HttpErrorResponse) {
+  private HandleAuthentication(resData: ResponsePayload) {
+    const expDate = new Date(new Date().getDate() + +resData.expiresIn * 1000);
+    const user = new User(
+      resData.email,
+      resData.localId,
+      resData.idToken,
+      expDate
+    );
+    this.user.next(user);
+  }
+  private HandleError(errorRes: HttpErrorResponse) {
     console.log(errorRes);
-    
+
     let ErrorMesssage = 'unknown error occurred';
     if (!(errorRes.error && errorRes.error.error)) {
       return throwError(ErrorMesssage);

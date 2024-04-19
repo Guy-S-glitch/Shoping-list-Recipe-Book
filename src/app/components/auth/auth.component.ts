@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService, ResponsePayload } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -13,7 +14,7 @@ export class AuthComponent implements OnInit {
   isLoading = false;
   errorMessage: string = null;
   loginForm: FormGroup;
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,private router:Router) {}
   switchMode() {
     this.isLoginMode = !this.isLoginMode;
   }
@@ -39,6 +40,7 @@ export class AuthComponent implements OnInit {
         console.log(responseData);
         this.isLoading = false;
         this.errorMessage = null;
+        this.router.navigate(['./recipes']); 
       },
       (error) => {
         this.errorMessage = error;
