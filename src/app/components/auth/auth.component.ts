@@ -1,6 +1,7 @@
-import { AuthService } from './../../services/auth.service';
+import { AuthService, ResponsePayload } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -23,22 +24,27 @@ export class AuthComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
+    let AuthObs: Observable<ResponsePayload>;
+    this.isLoading = true;
+    const email = this.loginForm.value['email'];
+    const password = this.loginForm.value['password'];
+
     if (this.isLoginMode) {
+      AuthObs = this.authService.signIn(email, password);
     } else {
-      this.isLoading = true;
-      const email = this.loginForm.value['email'];
-      const password = this.loginForm.value['password'];
-      this.authService.signup(email, password).subscribe(
-        (responseData) => {
-          console.log(responseData);
-          this.isLoading = false;
-        },
-        (error) => { 
-          this.errorMessage=error;
-          this.isLoading = false;
-        }
-      );
+      AuthObs = this.authService.signUp(email, password);
     }
+    AuthObs.subscribe(
+      (responseData) => {
+        console.log(responseData);
+        this.isLoading = false;
+        this.errorMessage = null;
+      },
+      (error) => {
+        this.errorMessage = error;
+        this.isLoading = false;
+      }
+    );
   }
   initForm() {
     this.loginForm = new FormGroup({
@@ -48,5 +54,5 @@ export class AuthComponent implements OnInit {
         Validators.required,
       ]),
     });
-  } 
+  }
 }
