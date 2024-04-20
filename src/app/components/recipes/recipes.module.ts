@@ -7,7 +7,7 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeStartComponent } from './recipe-start/recipe-start.component';
 import { RecipesComponent } from './recipes.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { recipesRouting } from './recipes.routing';
 import { SharedModule } from '../../shared/shared.module';
 
@@ -26,6 +26,6 @@ import { SharedModule } from '../../shared/shared.module';
     RecipeItemComponent,
     RecipeStartComponent,
     RecipeEditComponent,
-  ], 
+  ],
 })
 export class RecipesModule {}

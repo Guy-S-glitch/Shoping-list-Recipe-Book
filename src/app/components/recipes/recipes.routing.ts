@@ -5,7 +5,6 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipeStartComponent } from './recipe-start/recipe-start.component';
 import { RecipesComponent } from './recipes.component';
-import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   {
@@ -28,8 +27,4 @@ const routes: Routes = [
     ],
   },
 ];
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class recipesRouting {}
+export const recipesRouting = RouterModule.forChild(routes);
