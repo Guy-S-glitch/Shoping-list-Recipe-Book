@@ -9,10 +9,11 @@ import { RecipesComponent } from './recipes.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { recipesRouting } from './recipes.routing';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     recipesRouting,
     FormsModule,
     ReactiveFormsModule,

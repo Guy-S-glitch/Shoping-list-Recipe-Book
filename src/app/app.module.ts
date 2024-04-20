@@ -15,16 +15,10 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { AlertComponent } from './shared/alert-message/alert/alert.component';
 import { RecipesModule } from './components/recipes/recipes.module';
 import { ShoppingListModule } from './components/shopping-list/shopping-list.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    DropdownDirective,
-    AuthComponent,
-    LoadingComponent,
-    AlertComponent,
-  ],
+  declarations: [AppComponent, HeaderComponent, AuthComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -33,6 +27,7 @@ import { ShoppingListModule } from './components/shopping-list/shopping-list.mod
     RecipesModule,
     ShoppingListModule,
     AppRoutingModule,
+    SharedModule,
   ],
   providers: [
     ShoppingListService,
