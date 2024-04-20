@@ -11,9 +11,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../../routers/app-routing.Module';
 import { DropdownDirective } from '../../shared/dropdown.directive';
+import { recipesRouting } from './recipes.routing';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    recipesRouting,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   declarations: [
     RecipesComponent,
     RecipeListComponent,
@@ -21,7 +28,6 @@ import { DropdownDirective } from '../../shared/dropdown.directive';
     RecipeItemComponent,
     RecipeStartComponent,
     RecipeEditComponent,
-    
   ],
   exports: [
     RecipesComponent,
