@@ -40,23 +40,6 @@ export class DataStorageService {
           this.recipeService.setRecipes(response);
         })
       );
-
-    // return this.http
-    //   .get<Recipe[]>(
-    //     'https://course-database-574ef-default-rtdb.europe-west1.firebasedatabase.app/posts.json'
-    //   )
-    //   .pipe(
-    //     map((recipes: Recipe[]) => {
-    //       return recipes.map((recipe: Recipe) => {
-    //         return {
-    //           ...recipe,
-    //           ingredients: recipe.ingredients ? recipe.ingredients : [],
-    //         };
-    //       });
-    //     }),
-    //     tap((response) => {
-    //       this.recipeService.setRecipes(response);
-    //     })
-    //   );
+ 
   }
 }

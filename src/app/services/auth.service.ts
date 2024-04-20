@@ -127,6 +127,10 @@ export class AuthService {
         ErrorMesssage =
           'The user account has been disabled by an administrator.';
         break;
+      case 'TOO_MANY_ATTEMPTS_TRY_LATER : Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.':
+        ErrorMesssage =
+          'Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.';
+        break;
     }
     return throwError(ErrorMesssage);
   }

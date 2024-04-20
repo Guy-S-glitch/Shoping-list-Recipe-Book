@@ -34,7 +34,7 @@ export class AuthComponent implements OnInit {
       AuthObs = this.authService.signIn(email, password);
     } else {
       AuthObs = this.authService.signUp(email, password);
-    }
+    } 
     AuthObs.subscribe(
       (responseData) => {
         console.log(responseData);
@@ -44,7 +44,7 @@ export class AuthComponent implements OnInit {
       },
       (error) => {
         this.errorMessage = error;
-        this.isLoading = false;
+        this.isLoading = false;  
       }
     );
   }
@@ -56,5 +56,8 @@ export class AuthComponent implements OnInit {
         Validators.required,
       ]),
     });
+  }
+  handleError(){
+    this.errorMessage=null;
   }
 }
