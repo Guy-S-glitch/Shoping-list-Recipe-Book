@@ -4,14 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { AppRoutingModule } from './routers/app-routing.Module';
+import { AppRoutingModule } from './app.routing';
 import {  HttpClientModule } from '@angular/common/http';
-import { AuthComponent } from './components/auth/auth.component'; 
-import { RecipesModule } from './components/recipes/recipes.module';
-import { ShoppingListModule } from './components/shopping-list/shopping-list.module';
+import { AuthComponent } from './components/auth/auth.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
-import { AuthModule } from './components/auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, AuthComponent],
@@ -20,12 +17,9 @@ import { AuthModule } from './components/auth/auth.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RecipesModule,
-    ShoppingListModule,
     AppRoutingModule,
     SharedModule,
     CoreModule,
-    AuthModule,
   ],
   bootstrap: [AppComponent],
 })

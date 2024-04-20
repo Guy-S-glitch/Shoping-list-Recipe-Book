@@ -1,5 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuardService } from '../../guards/auth-guard.service';
+import { AuthGuardService } from '../auth/auth-guard.service';
 import { RecipeResolveService } from '../../services/recipe-resolve.service';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
@@ -8,7 +8,7 @@ import { RecipesComponent } from './recipes.component';
 
 const routes: Routes = [
   {
-    path: 'recipes',
+    path: '',
     component: RecipesComponent,
     canActivate: [AuthGuardService],
     children: [
