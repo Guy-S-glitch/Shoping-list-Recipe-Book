@@ -7,10 +7,7 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeStartComponent } from './recipe-start/recipe-start.component';
 import { RecipesComponent } from './recipes.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from '../../routers/app-routing.Module';
-import { DropdownDirective } from '../../shared/dropdown.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { recipesRouting } from './recipes.routing';
 
 @NgModule({
