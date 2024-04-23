@@ -5,7 +5,10 @@ import { Subscription } from 'rxjs/Subscription';
 import { Ingredient } from '../../../Models/ingredient.model';
 import { ShoppingListService } from '../../../services/shopping-list.service';
 import { Store } from '@ngrx/store';
-import { ADD_INGREDIENT } from '../store/shopping-list.action';
+import {
+  ADD_INGREDIENT,
+  UPDATE_INGREDIENT,
+} from '../store/shopping-list.action';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -42,9 +45,15 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const value = form.value;
     const newIngredient = new Ingredient(value.name, value.amount);
     if (this.editMode) {
-      this.slService.updateIngredient(this.editedItemIndex, newIngredient);
+      this.store.dispatch(
+        UPDATE_INGREDIENT({
+          ingredient: newIngredient,
+          index: this.editedItemIndex,
+        })
+      );
+      // this.slService.updateIngredient(this.editedItemIndex, newIngredient);
     } else {
-      this.store.dispatch(ADD_INGREDIENT({ingredient:newIngredient}))
+      this.store.dispatch(ADD_INGREDIENT({ ingredient: newIngredient }));
       // this.slService.addIngredient(newIngredient);
     }
     this.editMode = false;
