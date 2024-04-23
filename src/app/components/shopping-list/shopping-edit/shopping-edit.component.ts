@@ -7,6 +7,7 @@ import { ShoppingListService } from '../../../services/shopping-list.service';
 import { Store } from '@ngrx/store';
 import {
   ADD_INGREDIENT,
+  REMOVE_INGREDIENT,
   UPDATE_INGREDIENT,
 } from '../store/shopping-list.action';
 
@@ -66,7 +67,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.slService.deleteIngredient(this.editedItemIndex);
+    this.store.dispatch(REMOVE_INGREDIENT({ index: this.editedItemIndex }));
+    // this.slService.deleteIngredient(this.editedItemIndex);
     this.onClear();
   }
 

@@ -41,6 +41,9 @@ export const shoppingListReducer = createReducer(
   }),
   on(REMOVE_INGREDIENT, (state, action) => ({
     ...state,
+    ingredients: state.ingredients.filter((ig, igIndex) => {
+      return igIndex !== action.index;
+    }),
   }))
 );
 
