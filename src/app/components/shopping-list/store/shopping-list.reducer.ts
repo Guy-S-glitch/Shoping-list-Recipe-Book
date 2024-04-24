@@ -3,16 +3,24 @@ import { Ingredient } from '../../../Models/ingredient.model';
 import {
   ADD_INGREDIENT,
   ADD_INGREDIENTS,
+  END_EDIT,
   REMOVE_INGREDIENT,
+  START_EDIT,
   UPDATE_INGREDIENT,
 } from './shopping-list.action';
 
 export interface State {
   ingredients: Ingredient[];
+  editedIngredient: Ingredient;
+  editedIngredientIndex: Number;
 }
-
+export interface AppState {
+  shoppingList: State;
+}
 const initialState: State = {
   ingredients: [new Ingredient('Apples', 5), new Ingredient('Tomatoes', 10)],
+  editedIngredient: null,
+  editedIngredientIndex: -1,
 };
 
 export const shoppingListReducer = createReducer(
@@ -26,33 +34,37 @@ export const shoppingListReducer = createReducer(
     ingredients: [...state.ingredients, ...action.ingredient],
   })),
   on(UPDATE_INGREDIENT, (state, action) => {
-    const ingredient = state.ingredients[action.index];
+    const ingredient = state.ingredients[+state.editedIngredientIndex];
     const updatedIngredient = {
       ...ingredient,
       ...action.ingredient,
     };
     const updatedIngredients = [...state.ingredients];
-    updatedIngredients[action.index] = updatedIngredient;
+    updatedIngredients[+state.editedIngredientIndex] = updatedIngredient;
 
     return {
       ...state,
       ingredients: updatedIngredients,
+      editedIngredient: null,
+      editedIngredientIndex: -1,
     };
   }),
   on(REMOVE_INGREDIENT, (state, action) => ({
     ...state,
     ingredients: state.ingredients.filter((ig, igIndex) => {
-      return igIndex !== action.index;
+      return igIndex !== +state.editedIngredientIndex;
     }),
+    editedIngredient: null,
+    editedIngredientIndex: -1,
+  })),
+  on(START_EDIT, (state, action) => ({
+    ...state,
+    editedIngredientIndex: action.index,
+    editedIngredient: { ...state.ingredients[action.index] },
+  })),
+  on(END_EDIT, (state, action) => ({
+    ...state,
+    editedIngredient: null,
+    editedIngredientIndex: -1,
   }))
 );
-
-// Below code will not work yet, since we have not yet created the shopping list actions.
-// But we can still see how the reducer will work (soon)
-// export const shoppingListReducer = createReducer(
-//   initialState,
-//   on(ShoppingListActions.AddIngredient, (state, action) => ({ // will only work if ShoppingListActions.AddIngredient is an action created via createAction()
-//     ...state,
-//     ingredients: [...state.ingredients, action.ingredient]
-//   })),
-// );
