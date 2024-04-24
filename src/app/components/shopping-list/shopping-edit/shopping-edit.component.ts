@@ -10,7 +10,7 @@ import {
   REMOVE_INGREDIENT,
   UPDATE_INGREDIENT,
 } from '../store/shopping-list.action';
-import { AppState } from '../store/shopping-list.reducer';
+import * as fromApp from '../../../app-state/app-state.reducer';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -24,7 +24,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   editedItemIndex: number;
   editedItem: Ingredient;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
     this.subscription = this.store

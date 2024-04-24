@@ -9,12 +9,10 @@ export const ADD_INGREDIENTS = createAction(
   '[Ingredient] Add ingredients',
   props<{ ingredient: Ingredient[] }>()
 );
-export const REMOVE_INGREDIENT = createAction(
-  '[Ingredient] Remove ingredient'
-);
+export const REMOVE_INGREDIENT = createAction('[Ingredient] Remove ingredient');
 export const UPDATE_INGREDIENT = createAction(
   '[Ingredient] Update ingredient',
-  props<{ ingredient: Ingredient}>()
+  props<{ ingredient: Ingredient }>()
 );
 export const START_EDIT = createAction(
   '[Ingredient] Start edit',

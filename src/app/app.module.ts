@@ -10,7 +10,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { StoreModule } from '@ngrx/store';
-import { shoppingListReducer } from './components/shopping-list/store/shopping-list.reducer';
+import { appReducer } from './app-state/app-state.reducer';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, AuthComponent],
@@ -22,7 +22,7 @@ import { shoppingListReducer } from './components/shopping-list/store/shopping-l
     AppRoutingModule,
     SharedModule,
     CoreModule,
-    StoreModule.forRoot({ shoppingList: shoppingListReducer }),
+    StoreModule.forRoot(appReducer),
   ],
   bootstrap: [AppComponent],
 })
