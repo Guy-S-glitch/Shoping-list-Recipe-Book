@@ -4,7 +4,6 @@ import { Subject } from 'rxjs/Subject';
 
 import { Recipe } from '../Models/recipe.model';
 import { Ingredient } from '../Models/ingredient.model';
-import { ShoppingListService } from './shopping-list.service';
 import { ADD_INGREDIENTS } from '../components/shopping-list/store/shopping-list.action';
 
 @Injectable()
@@ -27,7 +26,6 @@ export class RecipeService {
   ];
 
   constructor(
-    private slService: ShoppingListService,
     private store: Store<{ shoppingList: { ingredients: Ingredient[] } }>
   ) {}
 
@@ -44,7 +42,6 @@ export class RecipeService {
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
-    // this.slService.addIngredients(ingredients);
     this.store.dispatch(ADD_INGREDIENTS({ingredient:ingredients}));
   }
 
