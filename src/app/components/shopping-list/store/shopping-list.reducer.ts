@@ -47,7 +47,7 @@ export const shoppingListReducer = createReducer(
       editedIngredientIndex: -1,
     };
   }),
-  on(REMOVE_INGREDIENT, (state, action) => ({
+  on(REMOVE_INGREDIENT, (state) => ({
     ...state,
     ingredients: state.ingredients.filter((ig, igIndex) => {
       return igIndex !== +state.editedIngredientIndex;
@@ -60,7 +60,7 @@ export const shoppingListReducer = createReducer(
     editedIngredientIndex: action.index,
     editedIngredient: { ...state.ingredients[action.index] },
   })),
-  on(END_EDIT, (state, action) => ({
+  on(END_EDIT, (state) => ({
     ...state,
     editedIngredient: null,
     editedIngredientIndex: -1,

@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment.development';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../app-state/app-state.reducer';
 import * as authAction from '../components/auth/store/auth.action';
+
 export interface ResponsePayload {
   idToken: string;
   email: string;
@@ -16,6 +17,7 @@ export interface ResponsePayload {
   localId: string;
   registered?: boolean;
 }
+
 @Injectable({
   providedIn: 'root',
 })
@@ -40,6 +42,7 @@ export class AuthService {
       )
       .pipe(catchError(this.HandleError), tap(this.HandleAuthentication));
   }
+
   signIn(userEmail: string, userPassword: string) {
     return this.http
       .post<ResponsePayload>(
@@ -56,6 +59,7 @@ export class AuthService {
         tap((ResData: ResponsePayload) => this.HandleAuthentication(ResData))
       );
   }
+
   logOut() {
     // this.user.next(null);
     this.store.dispatch(authAction.LOG_OUT());
@@ -111,8 +115,6 @@ export class AuthService {
     localStorage.setItem('userData', JSON.stringify(user));
   }
   private HandleError(errorRes: HttpErrorResponse) {
-    console.log(errorRes);
-
     let ErrorMesssage = 'unknown error occurred';
     if (!(errorRes.error && errorRes.error.error)) {
       return throwError(ErrorMesssage);
