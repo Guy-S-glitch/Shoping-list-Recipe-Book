@@ -1,6 +1,5 @@
 import { Store } from '@ngrx/store';
 import * as fromApp from './app-state/app-state.reducer';
-import { AuthService } from './services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { AUTO_LOGIN } from './components/auth/store/auth.action';
 
