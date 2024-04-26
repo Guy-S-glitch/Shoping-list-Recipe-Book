@@ -13,7 +13,8 @@ import { StoreModule } from '@ngrx/store';
 import { appReducer } from './app-state/app-state.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './components/auth/store/auth.effect';
-
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 @NgModule({
   declarations: [AppComponent, HeaderComponent, AuthComponent],
   imports: [
@@ -26,6 +27,7 @@ import { AuthEffects } from './components/auth/store/auth.effect';
     CoreModule,
     StoreModule.forRoot(appReducer),
     EffectsModule.forRoot([AuthEffects]),
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
   ],
   bootstrap: [AppComponent],
 })

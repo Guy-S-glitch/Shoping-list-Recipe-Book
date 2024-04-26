@@ -6,7 +6,7 @@ import {
   StoreFeatureModule,
   StoreRootModule,
   createAction
-} from "./chunk-OK2YNV3J.js";
+} from "./chunk-OBTWDFVT.js";
 import {
   ENVIRONMENT_INITIALIZER,
   ErrorHandler,
@@ -22,7 +22,10 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵinject
-} from "./chunk-O7FY3XZU.js";
+} from "./chunk-5UGALOS3.js";
+import {
+  init_esm5
+} from "./chunk-MM5KWZKX.js";
 import {
   catchError,
   concatMap,
@@ -34,9 +37,6 @@ import {
   take,
   withLatestFrom
 } from "./chunk-5R5DE6T5.js";
-import {
-  init_esm5
-} from "./chunk-MM5KWZKX.js";
 import {
   Observable,
   Subject,

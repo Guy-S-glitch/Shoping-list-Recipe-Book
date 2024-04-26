@@ -21,16 +21,16 @@ import {
   ɵɵdefineNgModule,
   ɵɵgetInheritedFactory,
   ɵɵinject
-} from "./chunk-O7FY3XZU.js";
+} from "./chunk-5UGALOS3.js";
+import {
+  init_esm5
+} from "./chunk-MM5KWZKX.js";
 import {
   distinctUntilChanged,
   pluck,
   scan,
   withLatestFrom
 } from "./chunk-5R5DE6T5.js";
-import {
-  init_esm5
-} from "./chunk-MM5KWZKX.js";
 import {
   BehaviorSubject,
   Observable,
@@ -1254,6 +1254,7 @@ function createReducer(initialState, ...ons) {
 }
 
 export {
+  toSignal,
   createAction,
   props,
   union,
@@ -1311,4 +1312,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-OK2YNV3J.js.map
+//# sourceMappingURL=chunk-OBTWDFVT.js.map

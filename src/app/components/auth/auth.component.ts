@@ -1,8 +1,6 @@
-import { Router } from '@angular/router';
-import { AuthService, ResponsePayload } from './../../services/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../app-state/app-state.reducer';
 import * as fromAction from './store/auth.action';

@@ -3,15 +3,6 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../app-state/app-state.reducer';
 import * as authAction from '../components/auth/store/auth.action';
 
-export interface ResponsePayload {
-  idToken: string;
-  email: string;
-  refreshToken: string;
-  expiresIn: string;
-  localId: string;
-  registered?: boolean;
-}
-
 @Injectable({
   providedIn: 'root',
 })
