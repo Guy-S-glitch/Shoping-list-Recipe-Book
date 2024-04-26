@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/auth.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as fromAction from './auth.action';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
@@ -25,7 +26,8 @@ export class AuthEffects {
     private actions$: Actions,
     private http: HttpClient,
     private route: Router,
-    private store: Store<fromApp.AppState>
+    private store: Store<fromApp.AppState>,
+    private authService: AuthService
   ) {}
 
   handleError = (errorRes: HttpErrorResponse) => {
@@ -109,13 +111,13 @@ export class AuthEffects {
             new Date(user._tokenExpirationDate)
           );
           if (loadedUser.token) {
+            this.authService.setLogOutTimer(
+              new Date(user._tokenExpirationDate).getTime() -
+                new Date().getTime()
+            );
             return this.store.dispatch(
               fromAction.AUTHENTICATE_SUCCESS({ user: loadedUser })
             );
-            // this.autoLogOut(
-            //   new Date(user._tokenExpirationDate).getTime() -
-            //     new Date().getTime()
-            // );
           }
           return { type: 'dummy' };
         })
@@ -126,7 +128,11 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(fromAction.LOG_OUT),
-        tap(() => localStorage.removeItem('userData'))
+        tap(() => {
+          localStorage.removeItem('userData');
+          this.authService.clearLogOutTimer();
+          this.route.navigate(['/auth']);
+        })
       ),
     { dispatch: false }
   );
@@ -146,6 +152,9 @@ export class AuthEffects {
               }
             )
             .pipe(
+              tap((resData) => {
+                this.authService.setLogOutTimer(+resData.expiresIn * 1000);
+              }),
               map((redData) => this.handleAuthentication(redData)),
               catchError((error) => this.handleError(error))
             );
@@ -169,6 +178,9 @@ export class AuthEffects {
               }
             )
             .pipe(
+              tap((resData) => {
+                this.authService.setLogOutTimer(+resData.expiresIn *1000);
+              }),
               map((resData) => this.handleAuthentication(resData)),
               catchError((errorRes) => this.handleError(errorRes))
             );
@@ -179,7 +191,7 @@ export class AuthEffects {
   redirect = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(fromAction.AUTHENTICATE_SUCCESS, fromAction.LOG_OUT),
+        ofType(fromAction.AUTHENTICATE_SUCCESS),
         tap(() => {
           this.route.navigate(['/']);
         })
