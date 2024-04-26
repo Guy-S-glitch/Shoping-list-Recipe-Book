@@ -77,18 +77,59 @@ export class AuthEffects {
   };
 
   handleAuthentication = (resData: ResponsePayload) => {
-    this.store.dispatch(
-      fromAction.AUTHENTICATE_SUCCESS({
-        user: new User(
-          resData.email,
-          resData.localId,
-          resData.idToken,
-          new Date(new Date().getTime() + +resData.expiresIn * 1000)
-        ),
-      })
+    const user = new User(
+      resData.email,
+      resData.localId,
+      resData.idToken,
+      new Date(new Date().getTime() + +resData.expiresIn * 1000)
     );
+    this.store.dispatch(fromAction.AUTHENTICATE_SUCCESS({ user }));
+    localStorage.setItem('userData', JSON.stringify(user));
   };
+
   @Injectable()
+  authAutoLogIn = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromAction.AUTO_LOGIN),
+        map(() => {
+          const user: {
+            email: string;
+            id: string;
+            _token: string;
+            _tokenExpirationDate: string;
+          } = JSON.parse(localStorage.getItem('userData'));
+          if (!user) {
+            return { type: 'dummy' };
+          }
+          const loadedUser = new User(
+            user.email,
+            user.id,
+            user._token,
+            new Date(user._tokenExpirationDate)
+          );
+          if (loadedUser.token) {
+            return this.store.dispatch(
+              fromAction.AUTHENTICATE_SUCCESS({ user: loadedUser })
+            );
+            // this.autoLogOut(
+            //   new Date(user._tokenExpirationDate).getTime() -
+            //     new Date().getTime()
+            // );
+          }
+          return { type: 'dummy' };
+        })
+      ),
+    { dispatch: false }
+  );
+  authAutoLogOut = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromAction.LOG_OUT),
+        tap(() => localStorage.removeItem('userData'))
+      ),
+    { dispatch: false }
+  );
   authSignUp = createEffect(
     () =>
       this.actions$.pipe(
@@ -112,7 +153,6 @@ export class AuthEffects {
       ),
     { dispatch: false }
   );
-
   authLogIn = createEffect(
     () =>
       this.actions$.pipe(
@@ -136,10 +176,10 @@ export class AuthEffects {
       ),
     { dispatch: false }
   );
-  loginSuccess = createEffect(
+  redirect = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(fromAction.AUTHENTICATE_SUCCESS),
+        ofType(fromAction.AUTHENTICATE_SUCCESS, fromAction.LOG_OUT),
         tap(() => {
           this.route.navigate(['/']);
         })

@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
 import { AuthService, ResponsePayload } from './../../services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../app-state/app-state.reducer';
 import * as fromAction from './store/auth.action';
@@ -12,22 +12,19 @@ import * as fromAction from './store/auth.action';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css'],
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
   isLoginMode = true;
   isLoading = false;
   errorMessage: string = null;
   loginForm: FormGroup;
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private store: Store<fromApp.AppState>
-  ) {}
+  storeSub: Subscription;
+  constructor(private store: Store<fromApp.AppState>) {}
   switchMode() {
     this.isLoginMode = !this.isLoginMode;
   }
   ngOnInit() {
     this.initForm();
-    this.store.select('auth').subscribe((authData) => {
+    this.storeSub = this.store.select('auth').subscribe((authData) => {
       this.isLoading = authData.isLoading;
       this.errorMessage = authData.errorMessage;
     });
@@ -56,6 +53,9 @@ export class AuthComponent implements OnInit {
     });
   }
   handleError() {
-    this.errorMessage = null;
+    this.store.dispatch(fromAction.CLEAN_ERROR());
+  }
+  ngOnDestroy(): void {
+    this.storeSub.unsubscribe();
   }
 }

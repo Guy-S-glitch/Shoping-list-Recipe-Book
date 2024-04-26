@@ -18,3 +18,5 @@ export const SIGN_UP_START = createAction(
   '[auth] Sign up',
   props<{ email: string; password: string }>()
 );
+export const CLEAN_ERROR = createAction('[auth] Clear error');
+export const AUTO_LOGIN = createAction('[auth] Auto log in');

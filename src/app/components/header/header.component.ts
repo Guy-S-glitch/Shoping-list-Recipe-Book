@@ -6,6 +6,7 @@ import { User } from '../../Models/user.model';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../app-state/app-state.reducer';
 import { map } from 'rxjs/operators';
+import * as fromAction from '../auth/store/auth.action';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +18,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   subUser: Subscription;
   constructor(
     private dataStorageService: DataStorageService,
-    private authService: AuthService,
     private store: Store<fromApp.AppState>
   ) {}
   onSave() {
@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
   onLogOut() {
-    this.authService.logOut();
+    this.store.dispatch(fromAction.LOG_OUT())
   }
   ngOnInit(): void {
     this.subUser = this.store

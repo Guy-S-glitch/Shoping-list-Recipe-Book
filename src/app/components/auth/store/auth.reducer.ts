@@ -24,7 +24,7 @@ export const authReducer = createReducer(
     user: null,
     isLoading: false,
   })),
-  on(fromAcrion.LOG_IN_START, (state, action) => ({
+  on(fromAcrion.LOG_IN_START, fromAcrion.SIGN_UP_START, (state, action) => ({
     ...state,
     errorMessage: null,
     isLoading: true,
@@ -34,9 +34,8 @@ export const authReducer = createReducer(
     errorMessage: action.errorMessage,
     isLoading: false,
   })),
-  on(fromAcrion.SIGN_UP_START, (state, action) => ({
+  on(fromAcrion.CLEAN_ERROR, (state) => ({
     ...state,
     errorMessage: null,
-    isLoading: true,
   }))
 );

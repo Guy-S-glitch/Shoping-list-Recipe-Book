@@ -22,7 +22,6 @@ export interface ResponsePayload {
   providedIn: 'root',
 })
 export class AuthService {
-  // user = new BehaviorSubject<User>(null);
   tokenExperationTimer: any;
   constructor(
     private http: HttpClient,
@@ -31,8 +30,7 @@ export class AuthService {
   ) {}
   
   logOut() {
-    this.store.dispatch(authAction.LOG_OUT());
-    this.router.navigate(['./auth']);
+    // this.store.dispatch(authAction.LOG_OUT());
     localStorage.removeItem('userData');
     if (this.tokenExperationTimer) {
       clearTimeout(this.tokenExperationTimer);
@@ -71,16 +69,5 @@ export class AuthService {
       );
     }
   }
-  private HandleAuthentication(resData: ResponsePayload) {
-    const expDate = new Date(new Date().getTime() + +resData.expiresIn * 1000);
-    const user = new User(
-      resData.email,
-      resData.localId,
-      resData.idToken,
-      expDate
-    );
-    this.store.dispatch(authAction.AUTHENTICATE_SUCCESS({ user: user }));
-    this.autoLogOut(+resData.expiresIn * 1000);
-    localStorage.setItem('userData', JSON.stringify(user));
-  }
+  
 }
