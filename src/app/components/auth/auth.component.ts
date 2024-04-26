@@ -5,7 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../app-state/app-state.reducer';
-import { LOG_IN, LOG_IN_START } from './store/auth.action';
+import * as fromAction from './store/auth.action';
 
 @Component({
   selector: 'app-auth',
@@ -36,29 +36,15 @@ export class AuthComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    let AuthObs: Observable<ResponsePayload>;
     this.isLoading = true;
     const email = this.loginForm.value['email'];
     const password = this.loginForm.value['password'];
 
     if (this.isLoginMode) {
-      this.store.dispatch(LOG_IN_START({ email, password }));
-      // AuthObs = this.authService.signIn(email, password);
+      this.store.dispatch(fromAction.LOG_IN_START({ email, password }));
     } else {
-      AuthObs = this.authService.signUp(email, password);
+      this.store.dispatch(fromAction.SIGN_UP_START({ email, password }));
     }
-    // AuthObs.subscribe(
-    //   (responseData) => {
-    //     console.log(responseData);
-    //     this.isLoading = false;
-    //     this.errorMessage = null;
-    //     this.router.navigate(['./recipes']);
-    //   },
-    //   (error) => {
-    //     this.errorMessage = error;
-    //     this.isLoading = false;
-    //   }
-    // );
   }
   initForm() {
     this.loginForm = new FormGroup({
