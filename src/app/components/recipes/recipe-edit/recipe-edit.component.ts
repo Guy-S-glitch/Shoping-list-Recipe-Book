@@ -2,13 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
-import { RecipeService } from '../recipe.service';
-import { Store } from '@ngrx/store';
-import * as fromApp from '../../../app-state/app-state.reducer';
-import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { Recipe } from '../../../Models/recipe.model';
-import { ADD_RECIPE, UPDATE_RECIPE } from '../store/recipe.action';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
+import * as fromApp from '../../../app-state/app-state.reducer';
+import * as fromAction from '../store/recipe.action';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -26,7 +24,6 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private recipeService: RecipeService,
     private router: Router,
     private store: Store<fromApp.AppState>
   ) {}
@@ -34,10 +31,15 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   onSubmit() {
     if (this.editMode) {
       this.store.dispatch(
-        UPDATE_RECIPE({ recipe: this.recipeForm.value, index: this.id })
+        fromAction.UPDATE_RECIPE({
+          recipe: this.recipeForm.value,
+          index: this.id,
+        })
       );
     } else {
-      this.store.dispatch(ADD_RECIPE({ recipe: this.recipeForm.value }));
+      this.store.dispatch(
+        fromAction.ADD_RECIPE({ recipe: this.recipeForm.value })
+      );
     }
     this.onCancel();
   }
