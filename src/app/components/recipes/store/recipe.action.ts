@@ -5,7 +5,7 @@ export const SET_RECIPES = createAction(
   '[recipe] Set recipes',
   props<{ recipes: Recipe[] }>()
 );
-
+export const FETCH_RECIPES = createAction('[recipe] Fetch recipe');
 export const ADD_RECIPE = createAction(
   '[recipe] Add recipe',
   props<{ recipe: Recipe }>()

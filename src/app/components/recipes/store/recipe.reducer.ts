@@ -14,6 +14,9 @@ export const recipeReducer = createReducer(
     ...state,
     recipes: [...action.recipes],
   })),
+  on(fromAction.FETCH_RECIPES, (state) => ({
+    ...state,
+  })),
   on(fromAction.ADD_RECIPE, (state, action) => ({
     ...state,
     recipes: [...state.recipes, action.recipe],

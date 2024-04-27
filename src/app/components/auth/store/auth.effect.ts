@@ -89,7 +89,6 @@ export class AuthEffects {
     localStorage.setItem('userData', JSON.stringify(user));
   };
 
-  @Injectable()
   authAutoLogIn = createEffect(
     () =>
       this.actions$.pipe(
