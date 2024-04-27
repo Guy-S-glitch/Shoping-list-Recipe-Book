@@ -23,7 +23,10 @@ export const recipeReducer = createReducer(
   })),
   on(fromAction.UPDATE_RECIPE, (state, action) => {
     const updatedRecipes: Recipe[] = [...state.recipes];
-    const updatedRecipe: Recipe = state.recipes[action.index];
+    const updatedRecipe: Recipe = {
+      ...state.recipes[action.index],
+      ...action.recipe,
+    };
     updatedRecipes[action.index] = updatedRecipe;
     return {
       ...state,

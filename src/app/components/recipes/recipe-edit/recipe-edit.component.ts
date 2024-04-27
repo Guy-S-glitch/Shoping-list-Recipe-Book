@@ -8,6 +8,7 @@ import * as fromApp from '../../../app-state/app-state.reducer';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Recipe } from '../../../Models/recipe.model';
+import { ADD_RECIPE, UPDATE_RECIPE } from '../store/recipe.action';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -32,9 +33,11 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.editMode) {
-      this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+      this.store.dispatch(
+        UPDATE_RECIPE({ recipe: this.recipeForm.value, index: this.id })
+      );
     } else {
-      this.recipeService.addRecipe(this.recipeForm.value);
+      this.store.dispatch(ADD_RECIPE({ recipe: this.recipeForm.value }));
     }
     this.onCancel();
   }
@@ -109,6 +112,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    this.recipeSub.unsubscribe();
+    if (this.recipeSub) {
+      this.recipeSub.unsubscribe();
+    }
   }
 }
