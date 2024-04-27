@@ -1,6 +1,6 @@
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
-import { DataStorageService } from './../../services/data-storage.service';
+import { DataStorageService } from './data-storage.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '../../Models/user.model';
 import { Store } from '@ngrx/store';

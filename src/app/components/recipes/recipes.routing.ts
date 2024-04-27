@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService } from '../auth/auth-guard.service';
-import { RecipeResolveService } from '../../services/recipe-resolve.service';
+import { RecipeResolveService } from './recipe-resolve.service';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipeStartComponent } from './recipe-start/recipe-start.component';

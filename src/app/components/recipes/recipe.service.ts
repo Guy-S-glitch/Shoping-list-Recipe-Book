@@ -2,10 +2,10 @@ import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
-import { Recipe } from '../Models/recipe.model';
-import { Ingredient } from '../Models/ingredient.model';
-import { ADD_INGREDIENTS } from '../components/shopping-list/store/shopping-list.action';
-import * as fromApp from '../app-state/app-state.reducer';
+import { Recipe } from '../../Models/recipe.model';
+import { Ingredient } from '../../Models/ingredient.model';
+import { ADD_INGREDIENTS } from '../shopping-list/store/shopping-list.action';
+import * as fromApp from '../../app-state/app-state.reducer';
 
 @Injectable()
 export class RecipeService {

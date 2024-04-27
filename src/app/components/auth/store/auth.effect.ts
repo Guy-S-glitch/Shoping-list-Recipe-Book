@@ -1,4 +1,4 @@
-import { AuthService } from './../../../services/auth.service';
+import { AuthService } from '../auth.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as fromAction from './auth.action';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';

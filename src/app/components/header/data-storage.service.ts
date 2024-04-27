@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RecipeService } from './recipe.service';
-import { Recipe } from '../Models/recipe.model';
+import { Recipe } from '../../Models/recipe.model';
 import { map, tap } from 'rxjs/operators';
-import { AuthService } from './auth.service';
+import * as fromApp from '../../app-state/app-state.reducer';
+import { Store } from '@ngrx/store';
+import { SET_RECIPES } from '../recipes/store/recipe.action';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +12,14 @@ import { AuthService } from './auth.service';
 export class DataStorageService {
   constructor(
     private http: HttpClient,
-    private recipeService: RecipeService,
-    private authService: AuthService
+    // private recipeService: RecipeService,
+    // private authService: AuthService
+    private store: Store<fromApp.AppState>
   ) {}
   saveData() {
-    const recipes = this.recipeService.getRecipes();
+    const recipes = this.store
+      .select('recipe')
+      .pipe(map((resData) => resData.recipes));
     return this.http.put(
       'https://course-database-574ef-default-rtdb.europe-west1.firebasedatabase.app/posts.json',
       recipes
@@ -36,7 +40,7 @@ export class DataStorageService {
           });
         }),
         tap((response) => {
-          this.recipeService.setRecipes(response);
+          this.store.dispatch(SET_RECIPES({ recipes: response }));
         })
       );
   }

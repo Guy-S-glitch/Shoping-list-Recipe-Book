@@ -1,13 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Ingredient } from '../../../Models/ingredient.model';
-import {
-  ADD_INGREDIENT,
-  ADD_INGREDIENTS,
-  END_EDIT,
-  REMOVE_INGREDIENT,
-  START_EDIT,
-  UPDATE_INGREDIENT,
-} from './shopping-list.action';
+import * as fromAction from './shopping-list.action';
 
 export interface State {
   ingredients: Ingredient[];
@@ -23,15 +16,15 @@ const initialState: State = {
 
 export const shoppingListReducer = createReducer(
   initialState,
-  on(ADD_INGREDIENT, (state, action) => ({
+  on(fromAction.ADD_INGREDIENT, (state, action) => ({
     ...state,
     ingredients: [...state.ingredients, action.ingredient],
   })),
-  on(ADD_INGREDIENTS, (state, action) => ({
+  on(fromAction.ADD_INGREDIENTS, (state, action) => ({
     ...state,
     ingredients: [...state.ingredients, ...action.ingredient],
   })),
-  on(UPDATE_INGREDIENT, (state, action) => {
+  on(fromAction.UPDATE_INGREDIENT, (state, action) => {
     const ingredient = state.ingredients[+state.editedIngredientIndex];
     const updatedIngredient = {
       ...ingredient,
@@ -47,7 +40,7 @@ export const shoppingListReducer = createReducer(
       editedIngredientIndex: -1,
     };
   }),
-  on(REMOVE_INGREDIENT, (state) => ({
+  on(fromAction.REMOVE_INGREDIENT, (state) => ({
     ...state,
     ingredients: state.ingredients.filter((ig, igIndex) => {
       return igIndex !== +state.editedIngredientIndex;
@@ -55,12 +48,12 @@ export const shoppingListReducer = createReducer(
     editedIngredient: null,
     editedIngredientIndex: -1,
   })),
-  on(START_EDIT, (state, action) => ({
+  on(fromAction.START_EDIT, (state, action) => ({
     ...state,
     editedIngredientIndex: action.index,
     editedIngredient: { ...state.ingredients[action.index] },
   })),
-  on(END_EDIT, (state) => ({
+  on(fromAction.END_EDIT, (state) => ({
     ...state,
     editedIngredient: null,
     editedIngredientIndex: -1,
