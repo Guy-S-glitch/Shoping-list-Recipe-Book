@@ -11,7 +11,7 @@ export const AUTHENTICATE_FAIL = createAction(
 );
 export const AUTHENTICATE_SUCCESS = createAction(
   '[auth] Authenticate success',
-  props<{ user: User }>()
+  props<{ user: User; redirect: boolean }>()
 );
 export const LOG_OUT = createAction('[auth] Log out');
 export const SIGN_UP_START = createAction(

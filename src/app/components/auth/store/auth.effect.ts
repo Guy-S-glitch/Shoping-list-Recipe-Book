@@ -85,7 +85,9 @@ export class AuthEffects {
       resData.idToken,
       new Date(new Date().getTime() + +resData.expiresIn * 1000)
     );
-    this.store.dispatch(fromAction.AUTHENTICATE_SUCCESS({ user }));
+    this.store.dispatch(
+      fromAction.AUTHENTICATE_SUCCESS({ user: user, redirect: true })
+    );
     localStorage.setItem('userData', JSON.stringify(user));
   };
 
@@ -115,7 +117,10 @@ export class AuthEffects {
                 new Date().getTime()
             );
             return this.store.dispatch(
-              fromAction.AUTHENTICATE_SUCCESS({ user: loadedUser })
+              fromAction.AUTHENTICATE_SUCCESS({
+                user: loadedUser,
+                redirect: false,
+              })
             );
           }
           return { type: 'dummy' };
@@ -178,7 +183,7 @@ export class AuthEffects {
             )
             .pipe(
               tap((resData) => {
-                this.authService.setLogOutTimer(+resData.expiresIn *1000);
+                this.authService.setLogOutTimer(+resData.expiresIn * 1000);
               }),
               map((resData) => this.handleAuthentication(resData)),
               catchError((errorRes) => this.handleError(errorRes))
@@ -191,8 +196,10 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(fromAction.AUTHENTICATE_SUCCESS),
-        tap(() => {
-          this.route.navigate(['/']);
+        tap((authSeccessAction) => {
+          if (authSeccessAction.redirect) {
+            this.route.navigate(['/']);
+          }
         })
       ),
     { dispatch: false }
