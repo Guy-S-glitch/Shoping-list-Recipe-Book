@@ -1,6 +1,6 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as fromAction from './recipe.action';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Recipe } from '../../../Models/recipe.model';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
@@ -34,6 +34,20 @@ export class recipeEffects {
         map((recipes) =>
           this.store.dispatch(fromAction.SET_RECIPES({ recipes }))
         )
+      ),
+    { dispatch: false }
+  );
+  saveRecipe = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromAction.SAVE_RECIPES),
+        withLatestFrom(this.store.select('recipe')),
+        switchMap(([actionData, stateData]) => {
+          return this.http.put(
+            'https://course-database-574ef-default-rtdb.europe-west1.firebasedatabase.app/posts.json',
+            stateData.recipes
+          );
+        })
       ),
     { dispatch: false }
   );

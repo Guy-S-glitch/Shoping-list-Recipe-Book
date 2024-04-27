@@ -18,3 +18,4 @@ export const REMOVE_RECIPE = createAction(
   '[recipe] Delete recipe',
   props<{ index: number }>()
 );
+export const SAVE_RECIPES = createAction('[recipe] Save recipe');

@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../app-state/app-state.reducer';
 import { map } from 'rxjs/operators';
 import * as fromAction from '../auth/store/auth.action';
-import { FETCH_RECIPES } from '../recipes/store/recipe.action';
+import { FETCH_RECIPES, SAVE_RECIPES } from '../recipes/store/recipe.action';
 
 @Component({
   selector: 'app-header',
@@ -22,9 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private store: Store<fromApp.AppState>
   ) {}
   onSave() {
-    this.dataStorageService.saveData().subscribe((data) => {
-      console.log(data);
-    });
+    this.store.dispatch(SAVE_RECIPES());
   }
   onFetch() {
     this.store.dispatch(FETCH_RECIPES());

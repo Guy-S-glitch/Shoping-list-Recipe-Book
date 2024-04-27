@@ -40,5 +40,5 @@ export const recipeReducer = createReducer(
         return action.index !== igIndex;
       }),
     };
-  })
+  }),
 );
