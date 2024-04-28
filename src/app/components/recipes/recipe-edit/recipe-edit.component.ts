@@ -7,11 +7,13 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import * as fromApp from '../../../app-state/app-state.reducer';
 import * as fromAction from '../store/recipe.action';
+import { show } from '../../../shared/animations';
 
 @Component({
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.css'],
+  animations: [show()],
 })
 export class RecipeEditComponent implements OnInit, OnDestroy {
   id: number;

@@ -7,19 +7,13 @@ import * as fromApp from '../../../app-state/app-state.reducer';
 import { map, switchMap } from 'rxjs/operators';
 import { REMOVE_RECIPE } from '../store/recipe.action';
 import { ADD_INGREDIENTS } from '../../shopping-list/store/shopping-list.action';
-import { state, style, trigger } from '@angular/animations';
+import { show } from '../../../shared/animations';
 
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.css'],
-  animations:[
-    // trigger('animate',[
-    //   state('show',style({
-        
-    //   }))
-    // ])
-  ]
+  animations: [show()],
 })
 export class RecipeDetailComponent implements OnInit {
   recipe: Recipe;

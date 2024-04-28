@@ -5,7 +5,14 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-
+export const show = () =>
+  trigger('show', [
+    state('DUMMY', style({ opacity: 1, transform: 'translateX(0)' })),
+    transition('void=>*', [
+      style({ opacity: 0, transform: 'translateX(100px)' }),
+      animate(300),
+    ]),
+  ]);
 export const listAnimation = () =>
   trigger('listAnimation', [
     state(
