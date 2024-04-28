@@ -11,6 +11,13 @@ import {
   UPDATE_INGREDIENT,
 } from '../store/shopping-list.action';
 import * as fromApp from '../../../app-state/app-state.reducer';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-shopping-edit',

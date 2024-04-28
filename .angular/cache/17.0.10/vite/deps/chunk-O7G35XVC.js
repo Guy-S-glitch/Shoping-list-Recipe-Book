@@ -1,9 +1,6 @@
 import {
-  init_esm5
-} from "./chunk-MM5KWZKX.js";
-import {
   first
-} from "./chunk-5R5DE6T5.js";
+} from "./chunk-BGHTEUUK.js";
 import {
   BehaviorSubject,
   Subject,
@@ -12,7 +9,7 @@ import {
   __spreadProps,
   __spreadValues,
   map
-} from "./chunk-OKSY2UGY.js";
+} from "./chunk-DD56SOZX.js";
 
 // node_modules/@angular/core/fesm2022/primitives/signals.mjs
 function defaultEquals(a, b) {
@@ -379,7 +376,6 @@ var WATCH_NODE = (() => {
 })();
 
 // node_modules/@angular/core/fesm2022/core.mjs
-init_esm5();
 var ERROR_DETAILS_PAGE_BASE_URL = "https://angular.io/errors";
 var XSS_SECURITY_URL = "https://g.co/ng/security#xss";
 var RuntimeError = class extends Error {
@@ -21603,4 +21599,4 @@ export {
    * found in the LICENSE file at https://angular.io/license
    *)
 */
-//# sourceMappingURL=chunk-5UGALOS3.js.map
+//# sourceMappingURL=chunk-O7G35XVC.js.map
