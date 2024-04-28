@@ -8,6 +8,13 @@ import { map, switchMap } from 'rxjs/operators';
 import { REMOVE_RECIPE } from '../store/recipe.action';
 import { ADD_INGREDIENTS } from '../../shopping-list/store/shopping-list.action';
 import { show } from '../../../shared/animations';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -18,7 +25,7 @@ import { show } from '../../../shared/animations';
 export class RecipeDetailComponent implements OnInit {
   recipe: Recipe;
   id: number;
-
+  State = 'DUMMY';
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -39,9 +46,14 @@ export class RecipeDetailComponent implements OnInit {
       )
       .subscribe((recipe) => {
         this.recipe = recipe;
+        this.State = 'TARGET';
       });
   }
+  onFinishAnimation(event) {
+    console.log(event);
 
+    this.State = 'DUMMY';
+  }
   onAddToShoppingList() {
     this.store.dispatch(
       ADD_INGREDIENTS({ ingredient: this.recipe.ingredients })

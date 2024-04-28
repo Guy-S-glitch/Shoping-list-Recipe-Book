@@ -7,7 +7,12 @@ import {
 } from '@angular/animations';
 export const show = () =>
   trigger('show', [
-    state('DUMMY', style({ opacity: 1, transform: 'translateX(0)' })),
+    state('TARGET', style({ opacity: 1, transform: 'translateX(0)' })),
+    state('DUMMY', style({ opacity: 0, transform: 'translateX(100px)' })),
+    transition('DUMMY=>TARGET', [
+      // style({ opacity: 0, transform: 'translateX(100px)' }),
+      animate(300),
+    ]),
     transition('void=>*', [
       style({ opacity: 0, transform: 'translateX(100px)' }),
       animate(300),
