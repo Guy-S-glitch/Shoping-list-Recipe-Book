@@ -5,11 +5,13 @@ import { Recipe } from '../../../Models/recipe.model';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../../app-state/app-state.reducer';
 import { map } from 'rxjs/operators';
+import { listAnimation } from '../../../shared/animations';
 
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.css'],
+  animations: [listAnimation()],
 })
 export class RecipeListComponent implements OnInit, OnDestroy {
   recipes: Recipe[];

@@ -10,7 +10,7 @@
           let ingredient of (ingredients | async).ingredients;
           let i = index
         "
-        [@ShoppingListAdd]
+        @listAnimation
         (click)="onEditItem(i)"
       >
         {{ ingredient.name }} ({{ ingredient.amount }})
