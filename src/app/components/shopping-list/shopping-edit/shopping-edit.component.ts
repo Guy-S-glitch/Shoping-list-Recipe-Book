@@ -4,21 +4,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { Ingredient } from '../../../Models/ingredient.model';
 import { Store } from '@ngrx/store';
-import {
-  ADD_INGREDIENT,
-  END_EDIT,
-  REMOVE_INGREDIENT,
-  UPDATE_INGREDIENT,
-} from '../store/shopping-list.action';
+import * as fromAction from '../store/shopping-list.action';
 import * as fromApp from '../../../app-state/app-state.reducer';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
-
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
@@ -56,12 +43,14 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const newIngredient = new Ingredient(value.name, value.amount);
     if (this.editMode) {
       this.store.dispatch(
-        UPDATE_INGREDIENT({
+        fromAction.UPDATE_INGREDIENT({
           ingredient: newIngredient,
         })
       );
     } else {
-      this.store.dispatch(ADD_INGREDIENT({ ingredient: newIngredient }));
+      this.store.dispatch(
+        fromAction.ADD_INGREDIENT({ ingredient: newIngredient })
+      );
     }
     this.editMode = false;
     form.reset();
@@ -70,16 +59,16 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   onClear() {
     this.slForm.reset();
     this.editMode = false;
-    this.store.dispatch(END_EDIT());
+    this.store.dispatch(fromAction.END_EDIT());
   }
 
   onDelete() {
-    this.store.dispatch(REMOVE_INGREDIENT());
+    this.store.dispatch(fromAction.REMOVE_INGREDIENT());
     this.onClear();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    this.store.dispatch(END_EDIT());
+    this.store.dispatch(fromAction.END_EDIT());
   }
 }

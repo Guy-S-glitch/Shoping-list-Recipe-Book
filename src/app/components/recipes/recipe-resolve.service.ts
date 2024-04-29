@@ -7,7 +7,7 @@ import {
 import { Recipe } from '../../Models/recipe.model';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../app-state/app-state.reducer';
-import { FETCH_RECIPES, SET_RECIPES } from './store/recipe.action';
+import { SET_RECIPES } from './store/recipe.action';
 import { Actions, ofType } from '@ngrx/effects';
 import { map, switchMap, take } from 'rxjs/operators';
 import { of } from 'rxjs';

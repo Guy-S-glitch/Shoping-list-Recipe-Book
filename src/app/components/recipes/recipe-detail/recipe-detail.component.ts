@@ -8,14 +8,6 @@ import { map, switchMap } from 'rxjs/operators';
 import { REMOVE_RECIPE } from '../store/recipe.action';
 import { ADD_INGREDIENTS } from '../../shopping-list/store/shopping-list.action';
 import { show } from '../../../shared/animations';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
-
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
